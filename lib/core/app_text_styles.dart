@@ -47,19 +47,19 @@ class AppTextStyles {
   );
 
   static final TextStyle body20 = GoogleFonts.openSans(
-    color: AppColors.blue,
+    color: AppColors.grey,
     fontSize: 20,
     fontWeight: FontWeight.normal,
   );
 
   static final TextStyle bodyBold20 = GoogleFonts.openSans(
-    color: AppColors.blue,
+    color: AppColors.grey,
     fontSize: 20,
     fontWeight: FontWeight.normal,
   );
 
   static final TextStyle bodyBold30 = GoogleFonts.openSans(
-    color: AppColors.blue,
+    color: AppColors.grey,
     fontSize: 40,
     fontWeight: FontWeight.w600,
   );
@@ -70,7 +70,7 @@ class AppTextStyles {
     fontWeight: FontWeight.normal,
   );
   static final TextStyle body11 = GoogleFonts.openSans(
-    color: AppColors.blue,
+    color: AppColors.grey,
     fontSize: 11,
     fontWeight: FontWeight.normal,
   );

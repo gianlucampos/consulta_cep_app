@@ -49,7 +49,7 @@ class SplashPageAnimatedState extends State<SplashPageAnimated>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.yellow,
+      backgroundColor: AppColors.blue,
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[

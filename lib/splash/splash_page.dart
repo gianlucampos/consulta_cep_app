@@ -15,7 +15,7 @@ class SplashPage extends StatelessWidget {
             ));
     return Scaffold(
       body: Container(
-        color: AppColors.yellow,
+        color: AppColors.blue,
         child: Center(
           child: Image.asset(AppImages.logo),
         ),

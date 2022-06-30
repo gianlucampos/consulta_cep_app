@@ -21,7 +21,6 @@ class _EnderecoPageState extends State<EnderecoPage> {
     return Scaffold(
       appBar: AppBar(title: Text("Resultados", style: AppTextStyles.titleBold)),
       body: Container(
-        color: AppColors.yellow,
         child: Center(
           child: FutureBuilder<EnderecoModel>(
             future: service.getEndereco(widget.numeroCep),

@@ -1,4 +1,4 @@
-import 'package:consulta_cep_app/core/app_colors.dart';
+import 'package:consulta_cep_app/core/app_globals.dart';
 import 'package:consulta_cep_app/core/app_text_styles.dart';
 import 'package:consulta_cep_app/endereco/endereco_page.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +23,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.yellow,
+      // backgroundColor: AppColors.yellow,
       appBar: AppBar(
         title: Text("Consulta CEP", style: AppTextStyles.title),
+        actions: [
+          IconButton(
+              onPressed: () {
+                currentTheme.switchTheme();
+              },
+              icon: Icon(Icons.dark_mode)),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
