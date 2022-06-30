@@ -1,5 +1,5 @@
 import 'package:consulta_cep_app/core/app_colors.dart';
-import 'package:consulta_cep_app/splash/splash_page.dart';
+import 'package:consulta_cep_app/splash/splash_page_animated.dart';
 import 'package:flutter/material.dart';
 
 class AppWidget extends StatelessWidget {
@@ -14,7 +14,8 @@ class AppWidget extends StatelessWidget {
       ),
       darkTheme: ThemeData.dark(),
       title: "Consulta CEP",
-      home: const SplashPage(),
+      // home: const SplashPage(),
+      home: SplashPageAnimated(),
     );
   }
 }
