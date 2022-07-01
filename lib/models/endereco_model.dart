@@ -1,6 +1,6 @@
 class EnderecoFields {
   static final String TABLE_NAME = 'Endereco';
-  static final String ID = '_id';
+  static final String ID = 'id';
   static final String CEP = 'cep';
   static final String LOGRADOURO = 'logradouro';
   static final String COMPLEMENTO = 'complemento';

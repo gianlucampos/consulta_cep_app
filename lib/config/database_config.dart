@@ -29,17 +29,20 @@ class DatabaseConfig {
 
     await db.execute('''
       CREATE TABLE ${EnderecoFields.TABLE_NAME} 
+      (
           ${EnderecoFields.ID} $idType,
           ${EnderecoFields.CEP} $StringType,
           ${EnderecoFields.LOGRADOURO} $StringType,
           ${EnderecoFields.COMPLEMENTO} $StringType,
           ${EnderecoFields.BAIRRO} $StringType,
+          ${EnderecoFields.LOCALIDATE} $StringType,
           ${EnderecoFields.UF} $StringType,
           ${EnderecoFields.IBGE} $StringType,
           ${EnderecoFields.GIA} $StringType,
           ${EnderecoFields.DDD} $StringType,
-          ${EnderecoFields.SIAFI} $StringType,
-''');
+          ${EnderecoFields.SIAFI} $StringType 
+      )
+      ''');
   }
 
   Future close() async {
