@@ -17,6 +17,16 @@ class EnderecoPage extends StatefulWidget {
 class _EnderecoPageState extends State<EnderecoPage> {
   final CepService service = CepService();
   final EnderecoRepository repository = EnderecoRepository();
+  EnderecoModel? endereco;
+
+  @override
+  void initState() {
+    repository
+        .retrieveEnderecoByCep(widget.numeroCep)
+        .then((value) => endereco = value)
+        .whenComplete(() => super.setState(() {}));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +34,9 @@ class _EnderecoPageState extends State<EnderecoPage> {
       appBar: AppBar(title: Text("Resultados", style: AppTextStyles.titleBold)),
       body: Container(
         child: Center(
-          child: futureBuilderDatabase(),
+          child: endereco == null
+              ? futureBuilderRequest()
+              : _buildTable(endereco!),
         ),
       ),
     );
@@ -39,28 +51,11 @@ class _EnderecoPageState extends State<EnderecoPage> {
           return _buildTable(snapshot.data!);
         }
         if (snapshot.hasError) {
-          return Text(snapshot.error.toString(),
-              style: AppTextStyles.bodyBold20);
-        }
-        return const CircularProgressIndicator();
-      },
-    );
-  }
-
-  FutureBuilder<EnderecoModel> futureBuilderDatabase() {
-    return FutureBuilder<EnderecoModel>(
-      future: repository.retrieveEnderecoByCep(widget.numeroCep),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasData) {
-            return _buildTable(snapshot.data!);
-          } else {
-            futureBuilderRequest();
-          }
-          if (snapshot.hasError) {
-            return Text(snapshot.error.toString(),
-                style: AppTextStyles.bodyBold20);
-          }
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Text(snapshot.error.toString(),
+                style: AppTextStyles.bodyBold20),
+          );
         }
         return const CircularProgressIndicator();
       },

@@ -1,5 +1,20 @@
+class EnderecoFields {
+  static final String TABLE_NAME = 'Endereco';
+  static final String ID = '_id';
+  static final String CEP = 'cep';
+  static final String LOGRADOURO = 'logradouro';
+  static final String COMPLEMENTO = 'complemento';
+  static final String BAIRRO = 'bairro';
+  static final String LOCALIDATE = 'localidade';
+  static final String UF = 'uf';
+  static final String IBGE = 'ibge';
+  static final String GIA = 'gia';
+  static final String DDD = 'ddd';
+  static final String SIAFI = 'siafi';
+}
+
 class EnderecoModel {
-  final int id;
+  final int? id;
   final String cep;
   final String logradouro;
   final String complemento;

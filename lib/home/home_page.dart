@@ -90,10 +90,13 @@ class _HomePageState extends State<HomePage> {
     if (_getErrorMessage() != null) {
       return null;
     }
+    String cepWithMask = _myController.text.substring(0, 5) +
+        "-" +
+        _myController.text.substring(5, 8);
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => EnderecoPage(numeroCep: _myController.text),
+        builder: (context) => EnderecoPage(numeroCep: cepWithMask),
       ),
     );
   }
