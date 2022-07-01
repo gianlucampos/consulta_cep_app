@@ -25,7 +25,7 @@ class _EnderecoPageState extends State<EnderecoPage> {
     repository
         .retrieveEnderecoByCep(widget.numeroCep)
         .then((value) => endereco = value)
-        .whenComplete(() => { super.setState(() {})});
+        .whenComplete(() => {super.setState(() {})});
   }
 
   @override

@@ -7,8 +7,7 @@ abstract class DatabaseRepository {
 
   Future<int> insert(dynamic object) async {
     var db = await _database;
-    var result = await db.insert('Endereco', object.toMap(),
-        conflictAlgorithm: ConflictAlgorithm.replace);
+    var result = await db.insert('Endereco', object.toMap());
     return result;
   }
 
