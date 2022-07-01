@@ -47,8 +47,9 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          alignment: WrapAlignment.center,
           children: [
             TextField(
               style: AppTextStyles.body20,
@@ -76,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: Text("Consultar", style: AppTextStyles.bodyBold20),
+                  child: Text("Consultar", style: AppTextStyles.bodyBoldWhite20),
                 ),
               ),
             ),

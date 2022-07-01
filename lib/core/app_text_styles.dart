@@ -52,6 +52,12 @@ class AppTextStyles {
     fontWeight: FontWeight.normal,
   );
 
+  static final TextStyle bodyBoldWhite20 = GoogleFonts.openSans(
+    color: AppColors.white,
+    fontSize: 20,
+    fontWeight: FontWeight.normal,
+  );
+
   static final TextStyle bodyBold20 = GoogleFonts.openSans(
     color: AppColors.grey,
     fontSize: 20,

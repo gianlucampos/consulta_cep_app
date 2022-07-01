@@ -21,11 +21,11 @@ class _EnderecoPageState extends State<EnderecoPage> {
 
   @override
   void initState() {
+    super.initState();
     repository
         .retrieveEnderecoByCep(widget.numeroCep)
         .then((value) => endereco = value)
-        .whenComplete(() => super.setState(() {}));
-    super.initState();
+        .whenComplete(() => { super.setState(() {})});
   }
 
   @override
@@ -46,16 +46,18 @@ class _EnderecoPageState extends State<EnderecoPage> {
     return FutureBuilder<EnderecoModel>(
       future: service.getEndereco(widget.numeroCep),
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          repository.insert(snapshot.data);
-          return _buildTable(snapshot.data!);
-        }
-        if (snapshot.hasError) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Text(snapshot.error.toString(),
-                style: AppTextStyles.bodyBold20),
-          );
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData) {
+            repository.insert(snapshot.data);
+            return _buildTable(snapshot.data!);
+          }
+          if (snapshot.hasError) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Text(snapshot.error.toString(),
+                  style: AppTextStyles.bodyBold20),
+            );
+          }
         }
         return const CircularProgressIndicator();
       },

@@ -6,6 +6,7 @@ class CepService {
 
   Future<EnderecoModel> getEndereco(String numeroCep) async {
     try {
+      numeroCep = numeroCep.replaceAll("-", "");
       final response =
           await _uno.get("https://viacep.com.br/ws/$numeroCep/json/");
 
