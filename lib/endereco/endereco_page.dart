@@ -17,51 +17,44 @@ class EnderecoPage extends StatefulWidget {
 class _EnderecoPageState extends State<EnderecoPage> {
   final CepService service = CepService();
   final EnderecoRepository repository = EnderecoRepository();
-  EnderecoModel? endereco;
-
-  @override
-  void initState() {
-    super.initState();
-    repository
-        .retrieveEnderecoByCep(widget.numeroCep)
-        .then((value) => endereco = value)
-        .whenComplete(() => {super.setState(() {})});
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Resultados", style: AppTextStyles.titleBold)),
       body: Container(
-        child: Center(
-          child: endereco == null
-              ? futureBuilderRequest()
-              : _buildTable(endereco!),
-        ),
+        child: Center(child: futureBuilderRequest()),
       ),
     );
   }
 
-  FutureBuilder<EnderecoModel> futureBuilderRequest() {
-    return FutureBuilder<EnderecoModel>(
-      future: service.getEndereco(widget.numeroCep),
+  FutureBuilder futureBuilderRequest() {
+    return FutureBuilder(
+      future: _getEndereco(),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasData) {
-            repository.insert(snapshot.data);
-            return _buildTable(snapshot.data!);
-          }
-          if (snapshot.hasError) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Text(snapshot.error.toString(),
-                  style: AppTextStyles.bodyBold20),
-            );
-          }
+        if (snapshot.connectionState == ConnectionState.done &&
+            snapshot.hasData) {
+          return _buildTable(snapshot.data!);
+        }
+        if (snapshot.hasError) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Text(snapshot.error.toString(),
+                style: AppTextStyles.bodyBold20),
+          );
         }
         return const CircularProgressIndicator();
       },
     );
+  }
+
+  Future _getEndereco() async {
+    var endereco = await repository.retrieveEnderecoByCep(widget.numeroCep);
+    if (endereco == null) {
+      endereco = await service.getEndereco(widget.numeroCep);
+      await repository.insert(endereco);
+    }
+    return endereco;
   }
 
   Widget _buildTable(EnderecoModel endereco) {
