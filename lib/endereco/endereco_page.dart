@@ -1,6 +1,7 @@
 import 'package:consulta_cep_app/core/app_colors.dart';
 import 'package:consulta_cep_app/core/app_text_styles.dart';
 import 'package:consulta_cep_app/models/endereco_model.dart';
+import 'package:consulta_cep_app/repository/endereco_repository.dart';
 import 'package:consulta_cep_app/services/cep_service.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class EnderecoPage extends StatefulWidget {
 
 class _EnderecoPageState extends State<EnderecoPage> {
   final CepService service = CepService();
+  final EnderecoRepository repository = EnderecoRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +24,46 @@ class _EnderecoPageState extends State<EnderecoPage> {
       appBar: AppBar(title: Text("Resultados", style: AppTextStyles.titleBold)),
       body: Container(
         child: Center(
-          child: FutureBuilder<EnderecoModel>(
-            future: service.getEndereco(widget.numeroCep),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return _buildTable(snapshot.data!);
-              }
-              if (snapshot.hasError) {
-                return Text(snapshot.error.toString(),
-                    style: AppTextStyles.bodyBold20);
-              }
-              return const CircularProgressIndicator();
-            },
-          ),
+          child: futureBuilderDatabase(),
         ),
       ),
+    );
+  }
+
+  FutureBuilder<EnderecoModel> futureBuilderRequest() {
+    return FutureBuilder<EnderecoModel>(
+      future: service.getEndereco(widget.numeroCep),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          repository.insert(snapshot.data);
+          return _buildTable(snapshot.data!);
+        }
+        if (snapshot.hasError) {
+          return Text(snapshot.error.toString(),
+              style: AppTextStyles.bodyBold20);
+        }
+        return const CircularProgressIndicator();
+      },
+    );
+  }
+
+  FutureBuilder<EnderecoModel> futureBuilderDatabase() {
+    return FutureBuilder<EnderecoModel>(
+      future: repository.retrieveEnderecoByCep(widget.numeroCep),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData) {
+            return _buildTable(snapshot.data!);
+          } else {
+            futureBuilderRequest();
+          }
+          if (snapshot.hasError) {
+            return Text(snapshot.error.toString(),
+                style: AppTextStyles.bodyBold20);
+          }
+        }
+        return const CircularProgressIndicator();
+      },
     );
   }
 

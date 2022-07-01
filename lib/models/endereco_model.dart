@@ -1,4 +1,5 @@
 class EnderecoModel {
+  final int id;
   final String cep;
   final String logradouro;
   final String complemento;
@@ -11,6 +12,7 @@ class EnderecoModel {
   final String siafi;
 
   const EnderecoModel({
+    required this.id,
     required this.cep,
     required this.logradouro,
     required this.complemento,
@@ -25,6 +27,7 @@ class EnderecoModel {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'cep': cep,
       'logradouro': logradouro,
       'complemento': complemento,
@@ -40,6 +43,7 @@ class EnderecoModel {
 
   factory EnderecoModel.fromMap(Map<String, dynamic> map) {
     return EnderecoModel(
+      id: map['id'] == null ? 0 : map['id'],
       cep: map['cep'] as String,
       logradouro: map['logradouro'] as String,
       complemento: map['complemento'] as String,
