@@ -60,19 +60,21 @@ class _EnderecoPageState extends State<EnderecoPage> {
   Widget _buildTable(EnderecoModel endereco) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Table(
-        border: TableBorder.all(),
-        children: [
-          _buildTableRow('CEP', endereco.cep),
-          _buildTableRow('Logradouro', endereco.logradouro),
-          _buildTableRow('Bairro', endereco.bairro),
-          _buildTableRow('Localidade', endereco.localidade),
-          _buildTableRow('UF', endereco.uf),
-          _buildTableRow('GIA', endereco.gia),
-          _buildTableRow('IBGE', endereco.ibge),
-          _buildTableRow('DDD', endereco.ddd),
-          _buildTableRow('SIAFI', endereco.siafi),
-        ],
+      child: SingleChildScrollView(
+        child: Table(
+          border: TableBorder.all(),
+          children: [
+            _buildTableRow('CEP', endereco.cep),
+            _buildTableRow('Logradouro', endereco.logradouro),
+            _buildTableRow('Bairro', endereco.bairro),
+            _buildTableRow('Localidade', endereco.localidade),
+            _buildTableRow('UF', endereco.uf),
+            _buildTableRow('GIA', endereco.gia),
+            _buildTableRow('IBGE', endereco.ibge),
+            _buildTableRow('DDD', endereco.ddd),
+            _buildTableRow('SIAFI', endereco.siafi),
+          ],
+        ),
       ),
     );
   }
