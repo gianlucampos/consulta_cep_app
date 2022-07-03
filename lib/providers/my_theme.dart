@@ -12,7 +12,7 @@ class MyTheme extends ChangeNotifier {
 
   void switchTheme() {
     themeData.isDark = !themeData.isDark;
-    repository.updateByField(object: themeData, field: ThemeDataFields.IS_DARK);
+    repository.updateByField(object: themeData, field: ThemeDataFields.isDark);
     notifyListeners();
   }
 }

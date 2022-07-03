@@ -1,6 +1,6 @@
 class ThemeDataFields {
-  static final String TABLE_NAME = 'ThemeData';
-  static final String IS_DARK = 'is_dark';
+  static const String tableName = 'ThemeData';
+  static const String isDark = 'is_dark';
 }
 
 class ThemeDataModel {
@@ -12,7 +12,7 @@ class ThemeDataModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'is_dark': this.isDark ? 1 : 0,
+      'is_dark': isDark ? 1 : 0,
     };
   }
 

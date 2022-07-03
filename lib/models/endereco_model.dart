@@ -1,16 +1,16 @@
 class EnderecoFields {
-  static final String TABLE_NAME = 'Endereco';
-  static final String ID = 'id';
-  static final String CEP = 'cep';
-  static final String LOGRADOURO = 'logradouro';
-  static final String COMPLEMENTO = 'complemento';
-  static final String BAIRRO = 'bairro';
-  static final String LOCALIDATE = 'localidade';
-  static final String UF = 'uf';
-  static final String IBGE = 'ibge';
-  static final String GIA = 'gia';
-  static final String DDD = 'ddd';
-  static final String SIAFI = 'siafi';
+  static String get tableName => 'Endereco';
+  static const String id = 'id';
+  static const String cep = 'cep';
+  static const String logradouro = 'logradouro';
+  static const String complemento = 'complemento';
+  static const String bairro = 'bairro';
+  static const String localidade = 'localidade';
+  static const String uf = 'uf';
+  static const String ibge = 'ibge';
+  static const String gia = 'gia';
+  static const String ddd = 'ddd';
+  static const String siafi = 'siafi';
 }
 
 class EnderecoModel {
@@ -58,7 +58,7 @@ class EnderecoModel {
 
   factory EnderecoModel.fromMap(Map<String, dynamic> map) {
     return EnderecoModel(
-      id: map['id'] == null ? null : map['id'],
+      id: map['id'],
       cep: map['cep'] as String,
       logradouro: map['logradouro'] as String,
       complemento: map['complemento'] as String,

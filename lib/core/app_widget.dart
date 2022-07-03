@@ -27,12 +27,12 @@ class _AppWidgetState extends State<AppWidget> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        appBarTheme: AppBarTheme(backgroundColor: AppColors.blue),
+        appBarTheme: const AppBarTheme(backgroundColor: AppColors.blue),
       ),
       darkTheme: ThemeData.dark(),
       themeMode: currentTheme.currentTheme(),
       title: "Consulta CEP",
-      home: SplashPageAnimated(),
+      home: const SplashPageAnimated(),
     );
   }
 }

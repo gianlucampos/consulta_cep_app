@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 currentTheme.switchTheme();
               },
-              icon: Icon(Icons.dark_mode)),
+              icon: const Icon(Icons.dark_mode)),
         ],
       ),
       body: Padding(
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
 
   void _changePage() {
     if (_getErrorMessage() != null) {
-      return null;
+      return;
     }
     String cepWithMask = _myController.text.substring(0, 5) +
         "-" +

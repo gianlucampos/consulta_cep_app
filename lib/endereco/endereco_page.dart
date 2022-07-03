@@ -22,9 +22,7 @@ class _EnderecoPageState extends State<EnderecoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Resultados", style: AppTextStyles.titleBold)),
-      body: Container(
-        child: Center(child: futureBuilderRequest()),
-      ),
+      body: Center(child: futureBuilderRequest()),
     );
   }
 
