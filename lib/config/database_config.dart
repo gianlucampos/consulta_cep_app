@@ -1,4 +1,5 @@
 import 'package:consulta_cep_app/models/endereco_model.dart';
+import 'package:consulta_cep_app/models/theme_data_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -26,6 +27,7 @@ class DatabaseConfig {
   Future _createDB(Database db, int version) async {
     final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     final StringType = 'TEXT';
+    final intType = 'INTEGER';
 
     await db.execute('''
       CREATE TABLE ${EnderecoFields.TABLE_NAME} 
@@ -41,7 +43,22 @@ class DatabaseConfig {
           ${EnderecoFields.GIA} $StringType,
           ${EnderecoFields.DDD} $StringType,
           ${EnderecoFields.SIAFI} $StringType 
+      );
+      ''');
+
+    await db.execute('''
+      CREATE TABLE ${ThemeDataFields.TABLE_NAME} 
+      (
+          ${ThemeDataFields.IS_DARK} $intType 
+      );
+      ''');
+
+    await db.execute('''
+      INSERT INTO ${ThemeDataFields.TABLE_NAME} 
+      (
+          ${ThemeDataFields.IS_DARK}
       )
+      VALUES (0); 
       ''');
   }
 

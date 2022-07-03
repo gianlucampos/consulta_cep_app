@@ -77,7 +77,8 @@ class _HomePageState extends State<HomePage> {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: Text("Consultar", style: AppTextStyles.bodyBoldWhite20),
+                  child:
+                      Text("Consultar", style: AppTextStyles.bodyBoldWhite20),
                 ),
               ),
             ),
