@@ -1,9 +1,10 @@
 import 'package:consulta_cep_app/models/endereco_model.dart';
+import 'package:consulta_cep_app/models/theme_data_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseConfig {
-  static const String _database_name = "cep_database.db";
+  static const String _databaseName = "cep_database.db";
   static final DatabaseConfig instance = DatabaseConfig._singleton();
 
   static Database? _database;
@@ -18,30 +19,42 @@ class DatabaseConfig {
 
   Future<Database> _initDB() async {
     final dbPath = await getDatabasesPath();
-    final path = join(dbPath, _database_name);
+    final path = join(dbPath, _databaseName);
 
     return await openDatabase(path, onCreate: _createDB, version: 1);
   }
 
   Future _createDB(Database db, int version) async {
-    final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
-    final StringType = 'TEXT';
+    const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
+    const stringType = 'TEXT';
+    const intType = 'INTEGER';
 
     await db.execute('''
-      CREATE TABLE ${EnderecoFields.TABLE_NAME} 
-      (
-          ${EnderecoFields.ID} $idType,
-          ${EnderecoFields.CEP} $StringType,
-          ${EnderecoFields.LOGRADOURO} $StringType,
-          ${EnderecoFields.COMPLEMENTO} $StringType,
-          ${EnderecoFields.BAIRRO} $StringType,
-          ${EnderecoFields.LOCALIDATE} $StringType,
-          ${EnderecoFields.UF} $StringType,
-          ${EnderecoFields.IBGE} $StringType,
-          ${EnderecoFields.GIA} $StringType,
-          ${EnderecoFields.DDD} $StringType,
-          ${EnderecoFields.SIAFI} $StringType 
-      )
+      CREATE TABLE ${EnderecoFields.tableName} (
+          ${EnderecoFields.id} $idType,
+          ${EnderecoFields.cep} $stringType,
+          ${EnderecoFields.logradouro} $stringType,
+          ${EnderecoFields.complemento} $stringType,
+          ${EnderecoFields.bairro} $stringType,
+          ${EnderecoFields.localidade} $stringType,
+          ${EnderecoFields.uf} $stringType,
+          ${EnderecoFields.ibge} $stringType,
+          ${EnderecoFields.gia} $stringType,
+          ${EnderecoFields.ddd} $stringType,
+          ${EnderecoFields.siafi} $stringType 
+      );
+      ''');
+
+    await db.execute('''
+      CREATE TABLE ${ThemeDataFields.tableName} (
+          ${ThemeDataFields.isDark} $intType 
+      );
+      ''');
+
+    await db.execute('''
+      INSERT INTO ${ThemeDataFields.tableName} (
+          ${ThemeDataFields.isDark}
+      ) VALUES (0); 
       ''');
   }
 

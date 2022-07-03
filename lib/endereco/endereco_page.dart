@@ -22,9 +22,7 @@ class _EnderecoPageState extends State<EnderecoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Resultados", style: AppTextStyles.titleBold)),
-      body: Container(
-        child: Center(child: futureBuilderRequest()),
-      ),
+      body: Center(child: futureBuilderRequest()),
     );
   }
 
@@ -52,7 +50,7 @@ class _EnderecoPageState extends State<EnderecoPage> {
     var endereco = await repository.retrieveEnderecoByCep(widget.numeroCep);
     if (endereco == null) {
       endereco = await service.getEndereco(widget.numeroCep);
-      await repository.insert(endereco);
+      await repository.insert(object: endereco);
     }
     return endereco;
   }

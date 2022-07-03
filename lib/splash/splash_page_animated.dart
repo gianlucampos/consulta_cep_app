@@ -6,8 +6,10 @@ import 'package:consulta_cep_app/home/home_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashPageAnimated extends StatefulWidget {
+  const SplashPageAnimated({Key? key}) : super(key: key);
+
   @override
-  SplashPageAnimatedState createState() => new SplashPageAnimatedState();
+  SplashPageAnimatedState createState() => SplashPageAnimatedState();
 }
 
 class SplashPageAnimatedState extends State<SplashPageAnimated>
@@ -17,9 +19,9 @@ class SplashPageAnimatedState extends State<SplashPageAnimated>
   late AnimationController animationController;
   late Animation<double> animation;
 
-  startTime() async {
-    var _duration = new Duration(seconds: 3);
-    return new Timer(_duration, navigationPage);
+  Future startTime() async {
+    var _duration = const Duration(seconds: 3);
+    return Timer(_duration, navigationPage);
   }
 
   void navigationPage() {
@@ -32,12 +34,12 @@ class SplashPageAnimatedState extends State<SplashPageAnimated>
   @override
   void initState() {
     super.initState();
-    animationController = new AnimationController(
-        vsync: this, duration: new Duration(seconds: 2));
+    animationController = AnimationController(
+        vsync: this, duration: const Duration(seconds: 2));
     animation =
-        new CurvedAnimation(parent: animationController, curve: Curves.easeOut);
+        CurvedAnimation(parent: animationController, curve: Curves.easeOut);
 
-    animation.addListener(() => this.setState(() {}));
+    animation.addListener(() => setState(() {}));
     animationController.forward();
 
     setState(() {
@@ -53,11 +55,11 @@ class SplashPageAnimatedState extends State<SplashPageAnimated>
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          new Column(
+          Column(
             mainAxisAlignment: MainAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
           ),
-          new Column(
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.asset(
